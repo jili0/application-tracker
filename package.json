@@ -1,5 +1,5 @@
 {
-  "name": "applicaton-tracker",
+  "name": "application-tracker",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,19 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.1.8"
+    "bcryptjs": "^2.4.3",
+    "mongoose": "^8.1.0",
+    "next": "14.1.0",
+    "next-auth": "^4.24.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "postcss": "^8",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1",
-    "eslint": "^9",
-    "eslint-config-next": "15.1.8",
-    "@eslint/eslintrc": "^3"
+    "typescript": "^5.3.3"
   }
 }
