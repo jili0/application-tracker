@@ -50,6 +50,10 @@ body {
   font-size: 14px;
 }
 
+.header-stats span {
+  white-space: nowrap;
+}
+
 .header-right {
   display: flex;
   align-items: center;
@@ -70,16 +74,21 @@ body {
   cursor: pointer;
 }
 
-.application-item:nth-child(even):not(.search-row) {
+/* Remove zebra striping for status-colored items */
+.application-item:nth-child(even):not(.search-row):not(.status-answered):not(.status-rejected) {
   background-color: #f9fafb;
 }
 
 .application-item.status-answered {
-  background-color: #f0fdf4;
+  background-color: #dcfce7 !important;
+}
+
+.application-item.status-no-answer:nth-child(even):not(.search-row) {
+  background-color: #f9fafb;
 }
 
 .application-item.status-rejected {
-  background-color: #fef2f2;
+  background-color: #fee2e2 !important;
 }
 
 /* Column styles */
@@ -99,6 +108,10 @@ body {
 
 .col-company {
   width: 20%;
+}
+
+.col-company span[title] {
+  cursor: help;
 }
 
 .col-position {

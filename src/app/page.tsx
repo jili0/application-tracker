@@ -155,6 +155,8 @@ const Home = () => {
   // Calculate statistics
   const totalApplications = applications.length;
   const answeredApplications = applications.filter(app => app.status === 'answered').length;
+  const noAnswerApplications = applications.filter(app => app.status === 'no-answer').length;
+  const rejectedApplications = applications.filter(app => app.status === 'rejected').length;
 
   // Show loading indicator
   if (status === 'loading' || status === 'unauthenticated') {
@@ -170,6 +172,8 @@ const Home = () => {
       <Header 
         totalApplications={totalApplications}
         answeredApplications={answeredApplications}
+        noAnswerApplications={noAnswerApplications}
+        rejectedApplications={rejectedApplications}
         userName={session?.user?.name || ''}
         onClear={applicationApi.clearApplications}
       />

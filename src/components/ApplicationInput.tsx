@@ -4,9 +4,10 @@ import { formatDate } from '@/lib/utils';
 
 interface ApplicationInputProps {
   onAddApplication: (application: ApplicationFormData) => void;
+  companyCount?: Record<string, number>;
 }
 
-const ApplicationInput = ({ onAddApplication }: ApplicationInputProps) => {
+const ApplicationInput = ({ onAddApplication, companyCount }: ApplicationInputProps) => {
   const [newApplication, setNewApplication] = useState<ApplicationFormData>({
     date: '',
     company: '',

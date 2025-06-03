@@ -9,6 +9,7 @@ interface ApplicationItemProps {
   onSave: (application: IApplication) => void;
   onDelete: () => void;
   searchTerms: SearchState;
+  companyCount: Record<string, number>;
 }
 
 const ApplicationItem = ({ 
@@ -17,7 +18,8 @@ const ApplicationItem = ({
   onEdit, 
   onSave, 
   onDelete,
-  searchTerms 
+  searchTerms,
+  companyCount 
 }: ApplicationItemProps) => {
   const [editedApplication, setEditedApplication] = useState<IApplication>({
     ...application
@@ -204,7 +206,20 @@ const ApplicationItem = ({
         {highlightText(application.date || '', searchTerms.date)}
       </div>
       <div className="col-company">
-        {highlightText(application.company || '', searchTerms.company)}
+        {(() => {
+          const companyKey = application.company.toLowerCase().trim();
+          const count = companyCount[companyKey] || 0;
+          const displayText = count > 1 ? `${application.company} (${count})` : application.company;
+          
+          if (count > 1) {
+            return (
+              <span title={`You have applied to ${application.company} ${count} times`}>
+                {highlightText(displayText, searchTerms.company)}
+              </span>
+            );
+          }
+          return highlightText(displayText || '', searchTerms.company);
+        })()}
       </div>
       <div className="col-position">
         {highlightText(application.position || '', searchTerms.position)}

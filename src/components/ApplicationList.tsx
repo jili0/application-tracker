@@ -26,6 +26,15 @@ const ApplicationList = ({
     remarks: ''
   });
 
+  // Calculate company counts
+  const companyCount = applications.reduce((acc, app) => {
+    const company = app.company.toLowerCase().trim();
+    if (company) {
+      acc[company] = (acc[company] || 0) + 1;
+    }
+    return acc;
+  }, {} as Record<string, number>);
+
   const handleEditApplication = (applicationId: string) => {
     setEditingApplicationId(applicationId);
   };
@@ -59,7 +68,10 @@ const ApplicationList = ({
         searchTerms={searchTerms}
         onSearchChange={handleSearchChange}
       />
-      <ApplicationInput onAddApplication={onAddApplication} />
+      <ApplicationInput 
+        onAddApplication={onAddApplication} 
+        companyCount={companyCount}
+      />
       {filteredApplications.map((application) => (
         <ApplicationItem
           key={application._id}
@@ -69,6 +81,7 @@ const ApplicationList = ({
           onSave={handleSaveApplication}
           onDelete={() => onDeleteApplication(application._id as string)}
           searchTerms={searchTerms}
+          companyCount={companyCount}
         />
       ))}
     </div>

@@ -4,17 +4,21 @@ import { signOut } from 'next-auth/react';
 interface HeaderProps {
   totalApplications: number;
   answeredApplications: number;
+  noAnswerApplications: number;
+  rejectedApplications: number;
   userName: string;
   onClear: () => void;
 }
 
-const Header = ({ totalApplications, answeredApplications, userName, onClear }: HeaderProps) => {
+const Header = ({ totalApplications, answeredApplications, noAnswerApplications, rejectedApplications, userName, onClear }: HeaderProps) => {
   return (
     <header className="header">
       <div className="container header-content">
         <div className="header-stats">
           <span>Total: <strong>{totalApplications}</strong></span>
-          <span>Answered: <strong>{answeredApplications}</strong></span>
+          <span style={{ color: '#16a34a' }}>Answered: <strong>{answeredApplications}</strong></span>
+          <span style={{ color: '#f59e0b' }}>No Answer: <strong>{noAnswerApplications}</strong></span>
+          <span style={{ color: '#dc2626' }}>Rejected: <strong>{rejectedApplications}</strong></span>
           <button 
             onClick={() => window.print()}
             className="btn btn-print"
