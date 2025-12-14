@@ -111,5 +111,5 @@ export const highlightText = (text: string, searchTerm: string): string => {
   if (!searchTerm || !text) return text;
   
   const regex = new RegExp(`(${searchTerm})`, 'gi');
-  return text.replace(regex, '<mark class="bg-yellow-300">$1</mark>');
+  return text.replace(regex, '<mark class="highlight">$1</mark>');
 };
