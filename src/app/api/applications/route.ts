@@ -1,13 +1,12 @@
 import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
+import { auth } from '@/auth';
 import dbConnect from '@/lib/db';
 import Application from '@/models/Application';
 import { sortApplications } from '@/lib/utils';
-import { authOptions } from '@/lib/auth';
 
 // Helper to get the current user's ID from session
 const getUserId = async () => {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   
   if (!session?.user) {
     throw new Error('Not authenticated');

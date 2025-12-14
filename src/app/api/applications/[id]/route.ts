@@ -1,12 +1,11 @@
 import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
+import { auth } from '@/auth';
 import dbConnect from '@/lib/db';
 import Application from '@/models/Application';
-import { authOptions } from '@/lib/auth';
 
 // Helper to get the current user's ID from session
 const getUserId = async () => {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   if (!session?.user) {
     throw new Error('Not authenticated');
   }
@@ -15,14 +14,15 @@ const getUserId = async () => {
 
 export const GET = async (
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) => {
   try {
     const userId = await getUserId();
     await dbConnect();
+    const { id } = await params;
     
     // Only allow access to the user's own applications
-    const application = await Application.findOne({ _id: params.id, userId });
+    const application = await Application.findOne({ _id: id, userId });
     
     if (!application) {
       return NextResponse.json({ error: 'Application not found' }, { status: 404 });
@@ -49,16 +49,17 @@ export const GET = async (
 
 export const PUT = async (
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) => {
   try {
     const userId = await getUserId();
     const body = await request.json();
     await dbConnect();
+    const { id } = await params;
     
     // Only allow updates to the user's own applications
     const application = await Application.findOneAndUpdate(
-      { _id: params.id, userId },
+      { _id: id, userId },
       {
         date: body.date,
         company: body.company,
@@ -94,14 +95,15 @@ export const PUT = async (
 
 export const DELETE = async (
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) => {
   try {
     const userId = await getUserId();
     await dbConnect();
+    const { id } = await params;
     
     // Only allow deletion of the user's own applications
-    const application = await Application.findOneAndDelete({ _id: params.id, userId });
+    const application = await Application.findOneAndDelete({ _id: id, userId });
     
     if (!application) {
       return NextResponse.json({ error: 'Application not found' }, { status: 404 });
