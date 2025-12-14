@@ -1,6 +1,6 @@
 # Application Tracker
 
-A minimalist job application tracking system built with Next.js, TypeScript, MongoDB, and Tailwind CSS.
+A minimalist job application tracking system built with Next.js, TypeScript, and MongoDB.
 
 ## Features
 
@@ -16,7 +16,6 @@ A minimalist job application tracking system built with Next.js, TypeScript, Mon
 ## Tech Stack
 
 - **Frontend**: Next.js 14, React 18, TypeScript
-- **Styling**: Tailwind CSS
 - **Database**: MongoDB with Mongoose
 - **Authentication**: NextAuth.js with JWT
 - **Deployment**: Vercel-ready
